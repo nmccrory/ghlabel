@@ -64,6 +64,8 @@ func init() {
 	RootCmd.PersistentFlags().StringVarP(&Repository, "repo", "", "", "A specific repository to sync.")
 	RootCmd.PersistentFlags().StringVarP(&Reference, "ref", "", "", "Required: the repository from which to replicate labels.")
 	RootCmd.PersistentFlags().BoolVarP(&ApplyLabels, "apply", "a", false, "Apply currently staged label changes.")
+
+	Execute()
 }
 
 // Execute runs Cobra
