@@ -8,7 +8,6 @@ stages:
     environment:
       GOPATH: /home/circleci/go
       ARTIFACTS: /artifacts
-
     steps:
       - run: mkdir -p ~/go/src/github.com/drud/ghlabel && mkdir -p ~/go/lib && mkdir -p ~/go/bin
 
