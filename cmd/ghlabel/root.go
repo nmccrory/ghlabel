@@ -30,16 +30,28 @@ var RootCmd = &cobra.Command{
 		client := NewClient()
 		if User != "" && Repository != "" {
 			// If we have both a user and repository then we run the tool on just that repository.
-			client.ListByUserRepository()
+			err := client.ListByUserRepository()
+			if err != nil {
+				log.Fatalf("%v", err)
+			}
 		} else if User != "" {
 			// If we Just have a user but no repository, then run the tool for all repositories for that user.
-			client.ListByUser()
+			err := client.ListByUser()
+			if err != nil {
+				log.Fatalf("%v", err)
+			}
 		} else if Organization != "" && Repository != "" {
 			// If we have an org and a repository, run the tool for just that repository.
-			client.ListByOrgRepository()
+			err := client.ListByOrgRepository()
+			if err != nil {
+				log.Fatalf("%v", err)
+			}
 		} else if Organization != "" {
 			// If we just have an org and no repository, run the tool on all repos in that org.
-			client.ListByOrg()
+			err := client.ListByOrg()
+			if err != nil {
+				log.Fatalf("%v", err)
+			}
 		} else {
 			log.Fatal("You must specify either an organization or user. Use -h for help.")
 		}
@@ -56,5 +68,10 @@ func init() {
 
 // Execute runs Cobra
 func Execute() {
-	RootCmd.Execute()
+	err := RootCmd.Execute()
+	if err != nil {
+		// This error should really never happen so we log and  exit.
+		log.Print(err)
+		os.Exit(1)
+	}
 }

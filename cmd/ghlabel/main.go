@@ -263,10 +263,10 @@ func commit(ctx context.Context, client *github.Client, owner string, repo strin
 	for _, v := range labels {
 		label := new(github.Label)
 
-		color := string(v.Color)
-		name := string(v.Name)
-		url := string(v.URL)
-		id := int(v.ID)
+		color := v.Color
+		name := v.Name
+		url := v.URL
+		id := v.ID
 
 		label.ID = &id
 		label.Color = &color
